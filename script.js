@@ -9,7 +9,7 @@ const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 
 // Song titles
-const songs = ['Believer', 'Stars']
+const songs = ['Myrath - Believer', 'SixxA.M. - Stars', 'Aöme - Le Bien Le Mal', 'Aöme - Mille Couronnes', 'Scott & Brendo Knock the Dominoes', 'SCOTTDW - Out of Mine', 'Thirty Seconds To Mars - Walk On Water', 'Vicetone - Nevada', 'Vicetone - Nothing Stopping Me', 'ZAYDE WOLF - GOLDEN AGE', 'ZAYDE WOLF - HEROES','ZAYDE WOLF - KING']
 
 // Keep track of song
 let songIndex = 1;
@@ -34,13 +34,37 @@ function playSong() {
 }
 //  Pause song
 function pauseSong() {
-  musicContainer.classList.add('play');
+  musicContainer.classList.remove('play');
   playBtn.querySelector('i.fas').classList.add('fa-play');
   playBtn.querySelector('i.fas').classList.remove('fa-pause');
 
   audio.pause();
 }
 
+// Previous song
+function prevSong() {
+  songIndex--;
+
+  if (songIndex < 0) {
+    songIndex = songs.length - 1;
+  }
+
+  loadSong(songs[songIndex]);
+
+  playSong();
+}
+// next song
+function nextSong() {
+  songIndex++;
+
+  if (songIndex > songs.length - 1) {
+    songIndex = 0;
+  }
+
+  loadSong(songs[songIndex]);
+
+  playSong();
+}
 
 
 // event listener
@@ -53,3 +77,7 @@ playBtn.addEventListener('click', () => {
     playSong();
   }
 });
+
+// Change song
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
